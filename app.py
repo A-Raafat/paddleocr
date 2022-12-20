@@ -86,7 +86,7 @@ with tab1:
             if button:
                 with st.spinner(text="It may take few seconds, please wait..."):
                     model = load_model()
-                    im_lines, im_parag, result = run_ocr(model, "test.png", recognition=True)
+                    im_lines, result = run_ocr(model, "test.png", recognition=True)
                     
                 st.write("Done processing! Pleae check the results tab")
 
