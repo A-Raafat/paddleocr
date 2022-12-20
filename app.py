@@ -1,7 +1,7 @@
 import streamlit as st
 from paddleocr import PaddleOCR
 from PIL import Image
-from main import *
+from utils import *
 
 @st.cache(allow_output_mutation=True)
 def load_model():
