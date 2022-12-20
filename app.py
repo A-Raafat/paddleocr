@@ -93,8 +93,8 @@ with tab1:
 
 with tab2:
     if image_file is not None and button and im != "STOP"  :
-        st.write("Lines and paragraphs outputs")
-        st.image([im_lines, im_parag], width=600)
+        st.write("Lines outputs")
+        st.image([im_lines], width=600)
 
         mapper = grep_text_mapper(result)
         boxes = [line[0] for line in result]
