@@ -37,4 +37,5 @@ RUN wget https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_cl
     
 WORKDIR /code
 EXPOSE 8080
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port", "8080"]
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
