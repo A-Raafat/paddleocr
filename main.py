@@ -7,7 +7,7 @@ import cv2
 def run_ocr(ocr, img_path, recognition=True):
         
     if recognition :
-        result = ocr.ocr(img_path, cls=True, rec=True)
+        result = ocr.ocr(img_path, cls=True, rec=True)[0]
         image = Image.open(img_path).convert('RGB')
         boxes = [line[0] for line in result]
 
