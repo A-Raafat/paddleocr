@@ -1,2 +1,3 @@
-paddleocr
 paddlepaddle
+paddleocr
+opencv-python
