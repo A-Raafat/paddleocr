@@ -1100,7 +1100,7 @@ def get_nearest_boxes2(parag, boxes, threshold):
 
 `get_nearest_boxes2` This function will get all the boxes that are near to the paragraph, and here we mean any box that has the y-axis distance between them is less than the threshold
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-131431.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-131431.png?api=v2)
 
 The blue box will not be added, while both green boxes will be added to the nearest boxes
 
@@ -1128,7 +1128,7 @@ The blue box will not be added, while both green boxes will be added to the near
         ###########
 ```
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-183025.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-183025.png?api=v2)
 
 Try here is used because sometimes the boxes that has width intersection with our paragraph can be more than 1 box. So we get the nearest boxes from them depending on the average / most frequent height.
 
@@ -1136,7 +1136,7 @@ Then we compute again and find the nearest boxes using the new threshold that ca
 
 Therefore, we handle this using try-except. But the main idea here is just **filtration** for the nearest boxes that we computed. so we want to get the boxes that have intersection over width from the nearest boxes with the paragraph boxes
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-132701.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-132701.png?api=v2)
 
 The bottom right box is the only one that has intersection in width with the paragraph, because it lies between **its** x-axis points. Therefore by doing this, we have filtered the blue and the bottom left green box.
 
@@ -1196,7 +1196,7 @@ def get_width_intersection(line1,line2):
 
 Intersection over width function, computes the intersection over width value between 2 boxes.
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-135536.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230101-135536.png?api=v2)
 
 Then we divide the width intersection by each the width of the boxes and take the maximum to compute the IOW which will be a value between 0 - 1 which will be then compared to the threshold (0.9 currently).
 
@@ -1236,7 +1236,7 @@ After that, we take the first nearest box (which is the nearest box to our parag
 
 Notice that the following scenario will happen.
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-151052.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-151052.png?api=v2)
 
 The green boxes that are close to the paragraph will still be included in the nearest boxes list and they might have height intersection in each other, so here we handle this case by the above note. if we found any of the nearest boxes has intersection in height, we immediately break the loop for time optimization. before we explain the next point, we will first mention the intersection in height function
 
@@ -1269,7 +1269,7 @@ def get_height_intersection(line1,line2):
     return max(height_inter/height_box1,height_inter/height_box2)
 ```
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-163051.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-163051.png?api=v2)
 
 ```
         if breaker:
@@ -1354,7 +1354,7 @@ def collect_all_boxes(current_parag_key, all_parag, remaining_boxes):
 
 This is the function that collects all the boxes excluding the boxes inside our current paragraph. check the following image for illustration.
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-215032.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230103-215032.png?api=v2)
 
 ```
             new_parag_from_parag = False
@@ -1377,7 +1377,7 @@ At this state, we have 2 lists:
 *   `width_inter_bb_parag` Contains the width intersection boxes with the current paragraph
     
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-134435.png?api=v2)![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-134702.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-134435.png?api=v2)![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-134702.png?api=v2)
 
 Notice that the box green box got reverted to blue, this is because the width intersection with the first box is less than the threshold (0.9).
 
@@ -1399,7 +1399,7 @@ Then we start looping over each list and get the height intersection of every bo
 
 Remember we are now comparing the width intersection boxes of paragraphs with our first nearest box, This will solve the issues in the image below.
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-145912.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-145912.png?api=v2)
 
 In case 1, we might have a box that has intersection in height but doesn't intersect in width, this means they are different columns. Notice that this light blue box came **only** from the width intersection boxes with paragraphs (`width_inter_bb_parag`)
 
@@ -1416,7 +1416,7 @@ While in case 2, we might have boxes that has intersection in height, but also i
 
 Then we start looping over the 2nd list which is `width_inter_bb_line` and check the height intersection with the current paragraph box, if it exists then we will set the flag `new_parag_from_line` to True and create a new paragraph. This condition solves the issue below.
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-153033.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/image-20230109-153033.png?api=v2)
 
 Notice that the paragraph has width intersection with the first nearest box but if we don't handle this case. The nearest box will be included in the paragraph which is incorrect. Therefore, We check the other width intersection boxes with the first nearest box.
 
@@ -1541,7 +1541,7 @@ Additional information is given in the properties such as:​
 *   Confidence values for each word "x\_confs" followed by the recognized text
     
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.12.08%20PM.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.12.08%20PM.png?api=v2)
 
 #### ALTO XML
 
@@ -1576,7 +1576,7 @@ Additional information is given in the properties such as:​
                 *   **WC** the confidence of the word
                     
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.14.55%20PM.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.14.55%20PM.png?api=v2)
 
 #### PAGEXML
 
@@ -1601,7 +1601,7 @@ Additional information is given in the properties such as:​
                 *   **<TextEquiv>** Contains the actual text and confidence for the word
                     
 
-![](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.15.52%20PM.png?api=v2)
+![alt text](https://a-raafat.atlassian.net/wiki/download/attachments/589834/Screen%20Shot%202022-12-18%20at%206.15.52%20PM.png?api=v2)
 
 # Model Training / Evaluation / Testing
 
